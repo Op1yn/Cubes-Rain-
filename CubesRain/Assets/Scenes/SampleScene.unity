@@ -203,7 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cube: {fileID: -6067904084239249691, guid: 8f585050862f0b64f8e7a81c6c4539db, type: 3}
   _poolCapasity: 5
-  _poolMaximumSize: 5
+  _poolMaximumSize: 10
 --- !u!114 &539338984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pool: {fileID: 539338983}
-  _spawnRate: 2
+  _spawnRate: 0.2
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +398,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00923797, y: -0, z: -0, w: 0.9999573}
-  m_LocalPosition: {x: 10.06, y: 7.95, z: -9.03}
+  m_LocalPosition: {x: 10.06, y: 7.87, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -740,7 +740,7 @@ Transform:
   m_GameObject: {fileID: 2100373797}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 9}
   m_LocalScale: {x: 40, y: 1, z: 40}
   m_ConstrainProportionsScale: 0
   m_Children: []

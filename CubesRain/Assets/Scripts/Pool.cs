@@ -5,9 +5,9 @@ public class Pool : MonoBehaviour
 {
     [SerializeField] private Cube _cube;
     [SerializeField] private int _poolCapasity = 5;
-    [SerializeField] private int _poolMaximumSize = 5;
+    [SerializeField] private int _poolMaximumSize = 10;
 
-    public ObjectPool<Cube> ObjectsPool { get; private set; }
+    public ObjectPool<Cube> CubesPool { get; private set; }
 
     private void Awake()
     {
@@ -16,37 +16,24 @@ public class Pool : MonoBehaviour
 
     private void InstantiatePool()
     {
-        ObjectsPool = new ObjectPool<Cube>(
-            createFunc: () => InstantiateCube(_cube),
+        CubesPool = new ObjectPool<Cube>(
+            createFunc: () => Instantiate(_cube),
             actionOnGet: (cube) => ActionOnGet(cube),
             actionOnRelease: (cube) => ActionOnRelease(cube),
-            actionOnDestroy: (cube) => Destroy(cube),
+            actionOnDestroy: (cube) => Destroy(cube.gameObject),
             collectionCheck: true,
             defaultCapacity: _poolCapasity,
             maxSize: _poolMaximumSize);
     }
 
-    public Cube InstantiateCube(Cube cube)
-    {
-        Debug.Log("Создание куба в пуле");
-
-       return Instantiate(cube);
-    }
-
     private void ActionOnGet(Cube cube)
     {
-        cube.transform.rotation = Quaternion.identity;
-        cube.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        cube.GetComponent<Rigidbody>().velocity = Vector3.zero;
         cube.gameObject.SetActive(true);
     }
 
     public void ActionOnRelease(Cube cube)
     {
-        Debug.Log("возврат куба в пуле");
-
-        //cube.TimerEnded -= ActionOnRelease;
         cube.gameObject.SetActive(false);
-        
-    }    
+        cube.SetHasTouchedPlatform(false);
+    }
 }
