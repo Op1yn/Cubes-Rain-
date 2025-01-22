@@ -7,9 +7,15 @@ using UnityEngine;
 public class Cube : MonoBehaviour
 {
     private Coroutine _shutdownTimerCoroutine;
+    private Rigidbody _rigidbody;
 
     public event Action<Cube> TimerEnded;
     public bool HasTouchedPlatform { get; private set; } = false;
+
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
 
     private void OnEnable()
     {
@@ -22,7 +28,7 @@ public class Cube : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Platform _) && HasTouchedPlatform == false)
         {
             HasTouchedPlatform = true;
-            GetComponent<MeshRenderer>().material.color = Color.red;
+            SetColor(Color.red);
             _shutdownTimerCoroutine = StartCoroutine(SwitchOff());
         }
     }
@@ -53,12 +59,17 @@ public class Cube : MonoBehaviour
 
     private void ResetPhysics()
     {
-        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        _rigidbody.angularVelocity = Vector3.zero;
+        _rigidbody.velocity = Vector3.zero;
     }
 
     private void ResetRotation()
     {
         transform.rotation = Quaternion.identity;
+    }
+
+    public void SetColor(Color color)
+    {
+        GetComponent<MeshRenderer>().material.color = color;
     }
 }

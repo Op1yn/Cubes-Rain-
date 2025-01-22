@@ -20,14 +20,16 @@ public class Spawner : MonoBehaviour
 
     public IEnumerator SpawnCube()
     {
+        WaitForSeconds waiting = new WaitForSeconds(_spawnRate);
+
         while (enabled)
         {
             Cube cube = _pool.CubesPool.Get();
-            cube.gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
+            cube.SetColor(Color.green);
             cube.transform.position = GetPosition();
             cube.TimerEnded += ReturnCube;
 
-            yield return new WaitForSeconds(_spawnRate);
+            yield return waiting;
         }
     }
 
